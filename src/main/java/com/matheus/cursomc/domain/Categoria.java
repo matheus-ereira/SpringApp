@@ -6,15 +6,14 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import lombok.Builder;
 import lombok.Data;
 
 /**
  *
  * @author Matheus
  */
-@Data
 @Entity
+@Data
 public class Categoria implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -23,7 +22,9 @@ public class Categoria implements Serializable {
     private Integer id;
     private String nome;
 
-    @Builder
+    public Categoria() {
+    }
+
     public Categoria(Integer id, String nome) {
         this.id = id;
         this.nome = nome;
