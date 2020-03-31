@@ -5,6 +5,7 @@
  */
 package com.matheus.cursomc.domain;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.matheus.cursomc.domain.enums.TipoCliente;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -38,6 +39,7 @@ public class Cliente implements Serializable {
     private String cpfCnpj;
     private Integer tipoCliente;
 
+    @JsonManagedReference
     @OneToMany(mappedBy = "cliente")
     private List<Endereco> enderecos = new ArrayList<>();
 
@@ -115,7 +117,7 @@ public class Cliente implements Serializable {
 
     @Override
     public int hashCode() {
-        int hash = 3;
+        int hash = 5;
         hash = 31 * hash + Objects.hashCode(this.id);
         return hash;
     }
