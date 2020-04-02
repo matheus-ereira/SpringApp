@@ -1,5 +1,6 @@
 package com.matheus.cursomc.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.matheus.cursomc.domain.enums.EstadoPagamento;
 import java.io.Serializable;
 import java.util.Objects;
@@ -10,8 +11,6 @@ import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.MapsId;
 import javax.persistence.OneToOne;
-
-
 
 /**
  *
@@ -28,6 +27,7 @@ public abstract class Pagamento implements Serializable {
 
     private Integer estado;
 
+    @JsonIgnore
     @OneToOne
     @JoinColumn(name = "pedido_id")
     @MapsId
@@ -40,7 +40,7 @@ public abstract class Pagamento implements Serializable {
         this.id = id;
         this.estado = estado.getCodigo();
         this.pedido = pedido;
-    }    
+    }
 
     public Integer getId() {
         return id;
@@ -65,7 +65,7 @@ public abstract class Pagamento implements Serializable {
     public void setPedido(Pedido pedido) {
         this.pedido = pedido;
     }
-    
+
     @Override
     public int hashCode() {
         int hash = 7;
