@@ -13,18 +13,23 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class CategoriaService {
-    
+
     @Autowired
     private CategoriaRepository repository;
-    
+
     public Categoria find(Integer id) {
         Optional<Categoria> obj = repository.findById(id);
         return obj.orElseThrow(() -> new NotFoundException(
                 "Objeto de id " + id + " não encontrado!!"));
     }
-    
+
     public Categoria insert(Categoria categoria) {
         categoria.setId(null);
+        return repository.save(categoria);
+    }
+
+    public Categoria update(Categoria categoria) {
+        find(categoria.getId());
         return repository.save(categoria);
     }
 }
