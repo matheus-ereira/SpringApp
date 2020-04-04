@@ -1,8 +1,11 @@
 package com.matheus.cursomc.resources;
 
 import com.matheus.cursomc.domain.Categoria;
+import com.matheus.cursomc.dto.CategoriaDTO;
 import com.matheus.cursomc.services.CategoriaService;
 import java.net.URI;
+import java.util.List;
+import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -26,20 +29,20 @@ public class CategoriaResource {
     }
 
     @RequestMapping(method = RequestMethod.POST)
-    public ResponseEntity<Void> insert(@RequestBody Categoria categoria) {
-        categoria = service.insert(categoria);
+    public ResponseEntity<Void> insert(@RequestBody Categoria obj) {
+        obj = service.insert(obj);
         URI uri = ServletUriComponentsBuilder
                 .fromCurrentRequest()
                 .path("/{id}")
-                .buildAndExpand(categoria)
+                .buildAndExpand(obj)
                 .toUri();
         return ResponseEntity.created(uri).build();
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
-    public ResponseEntity<Void> insert(@PathVariable Integer id, @RequestBody Categoria categoria) {
-        categoria.setId(id);
-        categoria = service.update(categoria);
+    public ResponseEntity<Void> insert(@PathVariable Integer id, @RequestBody Categoria obj) {
+        obj.setId(id);
+        obj = service.update(obj);
         return ResponseEntity.noContent().build();
     }
 
@@ -47,5 +50,15 @@ public class CategoriaResource {
     public ResponseEntity<Void> insert(@PathVariable Integer id) {
         service.delete(id);
         return ResponseEntity.noContent().build();
+    }
+
+    @RequestMapping(method = RequestMethod.GET)
+    public ResponseEntity<List<CategoriaDTO>> findAll() {
+        List<Categoria> list = service.findAll();
+        List<CategoriaDTO> result = list
+                .stream()
+                .map(obj -> new CategoriaDTO(obj))
+                .collect(Collectors.toList());
+        return ResponseEntity.ok().body(result);
     }
 }
