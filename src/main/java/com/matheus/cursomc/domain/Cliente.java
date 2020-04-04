@@ -5,9 +5,7 @@
  */
 package com.matheus.cursomc.domain;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.matheus.cursomc.domain.enums.TipoCliente;
 import java.io.Serializable;
 import java.util.ArrayList;
