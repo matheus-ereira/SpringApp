@@ -1,6 +1,7 @@
 package com.matheus.cursomc.services;
 
 import com.matheus.cursomc.domain.Categoria;
+import com.matheus.cursomc.dto.CategoriaDTO;
 import com.matheus.cursomc.repositories.CategoriaRepository;
 import com.matheus.cursomc.services.exception.DataIntegrityException;
 import com.matheus.cursomc.services.exception.NotFoundException;
@@ -55,5 +56,9 @@ public class CategoriaService {
     public Page<Categoria> findPage(Integer page, Integer linesPerPage, String orderBy, String direction) {
         PageRequest pageRequest = PageRequest.of(page, linesPerPage, Direction.valueOf(direction), orderBy);
         return repository.findAll(pageRequest);
+    }
+    
+    public Categoria fromDTO(CategoriaDTO objDTO){
+        return new Categoria(objDTO.getId(), objDTO.getNome());
     }
 }
